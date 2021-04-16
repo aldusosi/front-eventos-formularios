@@ -24,6 +24,26 @@
   </body>
 
   <script>
+    const balao = document.querySelector('img');
+    let tamanho = 1;
+
+    function crescer () {
+      tamanho += 0.1;
+      balao.style.transform = `scale(${tamanho})`;
+    };
+
+    function estourar () {
+       if (balao.style.transform === 'scale(2)') {
+         balao.src = 'estouro.svg';
+         balao.removeEventListener('click', crescer);
+       }
+    };
+
+    balao.addEventListener('click', crescer);
+    balao.addEventListener('click', estourar);
+    
+
+    
   </script>
 
 </html>
