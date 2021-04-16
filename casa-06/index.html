@@ -7,11 +7,22 @@
     <title>Busca de professores</title>
   </head>
 
-  <body>
-
+  <body style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <div>
+      <label for="professor">Busque seu Professor</label>
+      <input type="number" id="professor" name="professor" min="0" placeholder="Digite o ID">
+      <button class="pesquisar" type="submit" onclick="buscarProfessor()">Pesquisar</button>
+    </div>
+    <div class="resultado">
+      <img src="#" alt="">
+      <h1></h1>
+      <p></p>
+    </div>
+    <span class="naoEncontrado" style="color: red; display: none;">Nenhum professor encontrado</span>
   </body>
 
   <script>
+    //Data
     const basePath = './assets/';
 
     const professores = [{
@@ -45,6 +56,33 @@
       stack: 'Backend',
       avatar: `${basePath}juninho.jfif`
     }]
+
+    //Elementos
+    const span = document.querySelector('.naoEncontrado');
+    const nome = document.querySelector('h1');
+    const titulo = document.querySelector('p');
+    const imagem = document.querySelector('img');
+
+    //Funções
+    function buscarProfessor() {
+      const idPesquisado = document.querySelector('#professor').valueAsNumber;
+      const prof = professores[idPesquisado];
+
+      if(idPesquisado > professores.length - 1){
+        span.style.display = 'block';
+        
+        nome.innerText = '';
+        titulo.innerText = '';
+        imagem.src = '';
+      }
+      else{
+        span.style.display = 'none';
+        
+        nome.innerText = String(prof.name);
+        titulo.innerText = String(prof.stack);
+        imagem.src = prof.avatar;
+      }
+    }
   </script>
 
 </html>
