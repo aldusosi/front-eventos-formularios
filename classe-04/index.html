@@ -24,6 +24,19 @@
   </body>
 
   <script>
+  const imagem = document.querySelector('img');
+  
+  imagem.addEventListener('click', estourar);
+
+  function estourar(){
+    if(imagem.width == 200){
+      imagem.src ="estouro.svg";
+    }
+    imagem.width = imagem.width+10;
+    imagem.height = imagem.height+10;
+  }
+  
+
   </script>
 
 </html>
