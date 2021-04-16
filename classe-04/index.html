@@ -24,6 +24,21 @@
   </body>
 
   <script>
+    const imagem = document.querySelector("img");
+    let transform = 1;
+    function crescer() {
+      transform += 0.1;
+       imagem.style.transform = `scale(${transform})`;
+    };
+    function estourar() {
+      if(imagem.style.transform === `scale(${2})`) {
+        imagem.src = "estouro.svg";
+        imagem.removeEventListener("click", crescer);
+      }
+    }
+
+    imagem.addEventListener("click", crescer);
+    imagem.addEventListener("click", estourar);
   </script>
 
 </html>
