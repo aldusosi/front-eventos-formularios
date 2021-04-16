@@ -42,7 +42,7 @@
                         <div class="validity-icon"></div>
                     </div>
                     <div class="button-wrapper">
-                        <button type="submit" class="animate__animated animate__bounceIn">PEGUE SUA AMOSTRA GRÁTIS</button>
+                        <button type="submit" class="animate__animated animate__bounceIn form__button">PEGUE SUA AMOSTRA GRÁTIS</button>
                     </div>
                     <p class="form__disclaimer animate__animated animate__fadeIn">Clicando neste botão, você está aceitando nossos <a href="#">Termos e Serviços.</a></p>
                 </form>
@@ -51,12 +51,88 @@
     </body>
 
     <script>
+        //Elementos
+        const nome = document.querySelector('.form__first-name');
+        const sobrenome = document.querySelector('.form__last-name');
+        const email = document.querySelector('.form__email');
+        const senha = document.querySelector('.form__password');
+        const botao = document.querySelector('.form__button');
+
+        //Variáveis
+        let nomeCorreto = false;
+        let sobrenomeCorreto = false;
+        let emailCorreto = false;
+        let senhaCorreto = false;
+
+        //Eventos
+        nome.addEventListener('change', () => {
+            console.log(nome.value);
+            if(nome.value[0] != nome.value[0].toUpperCase()){
+                invalidarElemento(nome, 'Nome deve iniciar com letra maiúscula');
+                nomeCorreto = false;
+            }
+            else{
+                validarElemento(nome);
+                nomeCorreto = true;
+            }
+        });
+
+        sobrenome.addEventListener('change', () => {
+            console.log(sobrenome.value);
+            if(sobrenome.value[0] != sobrenome.value[0].toUpperCase()){
+                invalidarElemento(sobrenome, 'Sobrenome deve iniciar com letra maiúscula');
+                sobrenomeCorreto = false;
+            }
+            else{
+                validarElemento(sobrenome);
+                sobrenomeCorreto = true;
+            }
+        });
+
+        email.addEventListener('input', () => {
+            if(!email.value.includes("@")){
+                invalidarElemento(email, 'Insira um e-mail válido');
+                emailCorreto = false;
+            }
+            else{
+                validarElemento(email);
+                emailCorreto = true;
+            }
+        });
+
+        senha.addEventListener('input', () => {
+            if(senha.value.length < 8){
+                invalidarElemento(senha, 'Insira uma senha com, pelo menos, 8 caracteres');
+                senhaCorreto = false;
+            }
+            else{
+                validarElemento(senha);
+                senhaCorreto = true;
+            }
+        });
+
+        botao.addEventListener('click', () => {
+            verificarFormulario();
+        });
+
+        //Funções
         function invalidarElemento(elemento, mensagem) {
             elemento.setCustomValidity(mensagem);
+            console.log(mensagem);
         }
 
         function validarElemento(elemento) {
             elemento.setCustomValidity('');
+        }
+
+        function verificarFormulario(event) {
+            if(nomeCorreto && sobrenomeCorreto && emailCorreto && senha){
+                alert('Obrigado por registrar!');
+                botao.removeEventListener();                
+            }
+            else{
+                alert('Um ou mais campos inválidos');
+            }
         }
     </script>
 
