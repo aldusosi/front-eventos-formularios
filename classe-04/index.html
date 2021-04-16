@@ -20,10 +20,27 @@
   </head>
 
   <body>
-    <img src="balao.png" alt="Um balão">
+    <img src="balao.png" alt="Um balão" style="transform: scale(1);">
   </body>
 
   <script>
+    const balao = document.querySelector('body img');
+          balao.addEventListener('click', crescer);
+          balao.addEventListener('click', estourar);
+
+    let escalar = 1;
+
+    function crescer(){
+      escalar +=.1;
+      balao.style.transform = `scale(${escalar})`;
+    }
+
+    function estourar(){
+      if (balao.style.transform === 'scale(2)'){
+        balao.src = "estouro.svg";
+        balao.removeEventListener('click', crescer);
+      }
+    }
   </script>
 
 </html>
