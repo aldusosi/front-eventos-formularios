@@ -27,6 +27,47 @@
   </body>
 
   <script>
+    const inputUm = document.querySelector(".primeiro input");
+    const inputDois = document.querySelector(".segundo input");
+    const seletorUm = document.querySelector(".primeiro select");
+    const seletorDois = document.querySelector(".segundo select");
+    
+    inputUm.addEventListener("input", (event) => {
+      if(seletorUm.value === "Celsius" && seletorDois.value === "Fahrenheit") {
+        inputDois.value = (inputUm.valueAsNumber * 9 / 5) + 32;
+      } else if(seletorUm.value === "Celsius" && seletorDois.value === "Kelvin") {
+        inputDois.value = inputUm.valueAsNumber + 273.15;
+      } else if(seletorUm.value === "Fahrenheit" && seletorDois.value === "Celsius") {
+        inputDois.value = (inputUm.valueAsNumber - 32) * 5 / 9;
+      } else if(seletorUm.value === "Fahrenheit" && seletorDois.value === "Kelvin") {
+        inputDois.value = (inputUm.valueAsNumber - 32) * 5 / 9 + 273.15;
+      } else if(seletorUm.value === "Kelvin" && seletorDois.value === "Celsius") {
+        inputDois.value = inputUm.valueAsNumber - 273.15;
+      } else if(seletorUm.value === "Kelvin" && seletorDois.value === "Fahrenheit") {
+        inputDois.value = (inputUm.valueAsNumber - 273.15) * 9 / 5 + 32;
+      } else {
+        inputDois.value = inputUm.value;
+      }
+    });
+
+    inputDois.addEventListener("input", (event) => {
+      if(seletorDois.value === "Celsius" && seletorUm.value === "Fahrenheit") {
+        inputUm.value = (inputDois.valueAsNumber * 9 / 5) + 32;
+      } else if(seletorDois.value === "Celsius" && seletorUm.value === "Kelvin") {
+        inputUm.value = inputDois.valueAsNumber + 273.15;
+      } else if(seletorDois.value === "Fahrenheit" && seletorUm.value === "Celsius") {
+        inputUm.value = (inputDois.valueAsNumber - 32) * 5 / 9;
+      } else if(seletorDois.value === "Fahrenheit" && seletorUm.value === "Kelvin") {
+        inputUm.value = (inputDois.valueAsNumber - 32) * 5 / 9 + 273.15;
+      } else if(seletorDois.value === "Kelvin" && seletorUm.value === "Celsius") {
+        inputUm.value = inputDois.valueAsNumber - 273.15;
+      } else if(seletorDois.value === "Kelvin" && seletorUm.value === "Fahrenheit") {
+        inputUm.value = (inputDois.valueAsNumber - 273.15) * 9 / 5 + 32;
+      } else {
+        inputUm.value = inputDois.value;
+      }
+    });
+
   </script>
 
 </html>
