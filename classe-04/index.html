@@ -24,6 +24,26 @@
   </body>
 
   <script>
+    let escala = 1;
+    const img = document.querySelector('img');
+
+    img.addEventListener('click', crescer);
+
+    function crescer(){
+      escala += 0.1;
+      if(escala >= 2){
+        estourar();
+        return;
+      }
+      img.style = `transform: scale(${escala.toFixed(2)}`;
+      console.log(escala.toFixed(2));
+    }
+
+    function estourar(){
+     img.src = 'estouro.svg';
+     img.removeEventListener('click', crescer);
+    }
+
   </script>
 
 </html>
