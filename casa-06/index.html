@@ -7,8 +7,61 @@
     <title>Busca de professores</title>
   </head>
 
-  <body>
+  <style>
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #623CEA;
+      color: #54426B;
+    }
+    .professores{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #E7DFC6;
+      border-radius: 20px;
+      min-height: 150px;
+      width: 200px;
+      margin-bottom: 200px;
+      padding: 10px;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    span {
+      text-align: center;
+      display: block;
+    }
+    img {
+      width: 50%;
+      border-radius: 50px;
+    }
+    p {
+      color: #526760;
+    }
+
+  </style>
+
+  <body>
+    <input type="number" min="0">
+    
+    <div class="professores">
+      <span>Informe o ID do professor!</span>
+        <img src="">
+        <h1></h1>
+        <p></p>
+    </div>
+      
   </body>
 
   <script>
@@ -45,6 +98,35 @@
       stack: 'Backend',
       avatar: `${basePath}juninho.jfif`
     }]
+
+    const conteudo = document.querySelector('.professores');
+    const input = document.querySelector('input');
+    const img = document.querySelector('img');
+    const nome = document.querySelector('h1');
+    const stack = document.querySelector('p');
+    const span = document.querySelector('span');
+
+    
+    
+    input.addEventListener('blur', (event) => {
+
+      const professor = professores.find(p => event.target.valueAsNumber === p.id);
+      
+      if (!professor) {
+        span.innerText = 'Nenhum professor encontrado...';
+        nome.innerText = '';
+        stack.innerText = '';
+        img.src = '';
+        img.alt = '';
+      }else {
+        span.innerText = '';
+        conteudo.style.display = 'flex';
+        nome.innerText = String(professor.name);
+        stack.innerText = String(professor.stack);
+        img.src = professor.avatar;
+      }
+    });
+
   </script>
 
 </html>
