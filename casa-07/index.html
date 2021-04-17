@@ -27,6 +27,79 @@
   </body>
 
   <script>
+    //Elementos
+    const entradas = document.querySelectorAll('.txtGrau');
+    const seletores = document.querySelectorAll('.drpTemperaturas');
+    const inputUm = entradas[0];
+    const inputDois = entradas[1]
+    const seletorUm = seletores[0];
+    const seletorDois = seletores[1];
+
+    //Eventos
+    entradas.forEach(entrada => {entrada.addEventListener('change', converter);});
+    seletores.forEach(seletor => {seletor.addEventListener('change', converter);});
+
+    //Funções
+    function converter(){
+      //Seletor 1
+      if(event.target === entradas[0] || event.target === seletores[1]){
+        //C
+        if(seletorUm.value === 'Celsius' && seletorDois.value === 'Fahrenheit'){
+          inputDois.valueAsNumber = ((inputUm.valueAsNumber * 9/5) + 32).toFixed(0);
+        }
+        else if(seletorUm.value === 'Celsius' && seletorDois.value === 'Kelvin'){
+          inputDois.valueAsNumber = (inputUm.valueAsNumber + 273.15).toFixed(0);
+        }
+
+        //F
+        else if(seletorUm.value === 'Fahrenheit' && seletorDois.value === 'Celsius'){
+          inputDois.valueAsNumber = ((inputUm.valueAsNumber - 32) * 5/9).toFixed(0);
+        }
+        else if(seletorUm.value === 'Fahrenheit' && seletorDois.value === 'Kelvin'){
+          inputDois.valueAsNumber = ((inputUm.valueAsNumber - 32) * 5/9 + 273.15).toFixed(0);
+        }
+
+        //K
+        else if(seletorUm.value === 'Kelvin' && seletorDois.value === 'Celsius'){
+          inputDois.valueAsNumber = (inputUm.valueAsNumber - 273.15).toFixed(0);
+        }
+        else if(seletorUm.value === 'Kelvin' && seletorDois.value === 'Fahrenheit'){
+          inputDois.valueAsNumber = ((inputUm.valueAsNumber - 273.15) * 9/5 + 32).toFixed(0);
+        }
+        else{
+          inputDois.valueAsNumber = inputUm.valueAsNumber;
+        }
+      }
+      //Seletor 2
+      else if(event.target === entradas[1] || event.target === seletores[0]){
+                //C
+        if(seletorDois.value === 'Celsius' && seletorUm.value === 'Fahrenheit'){
+          inputUm.valueAsNumber = ((inputDois.valueAsNumber * 9/5) + 32).toFixed(0);
+        }
+        else if(seletorDois.value === 'Celsius' && seletorUm.value === 'Kelvin'){
+          inputUm.valueAsNumber = (inputDois.valueAsNumber + 273.15).toFixed(0);
+        }
+
+        //F
+        else if(seletorDois.value === 'Fahrenheit' && seletorUm.value === 'Celsius'){
+          inputUm.valueAsNumber = ((inputDois.valueAsNumber - 32) * 5/9).toFixed(0);
+        }
+        else if(seletorDois.value === 'Fahrenheit' && seletorUm.value === 'Kelvin'){
+          inputUm.valueAsNumber = ((inputDois.valueAsNumber - 32) * 5/9 + 273.15).toFixed(0);
+        }
+
+        //K
+        else if(seletorDois.value === 'Kelvin' && seletorUm.value === 'Celsius'){
+          inputUm.valueAsNumber = (inputDois.valueAsNumber - 273.15).toFixed(0);
+        }
+        else if(seletorDois.value === 'Kelvin' && seletorUm.value === 'Fahrenheit'){
+          inputUm.valueAsNumber = ((inputDois.valueAsNumber - 273.15) * 9/5 + 32).toFixed(0);
+        }
+        else{
+          inputUm.valueAsNumber = inputDois.valueAsNumber;
+        }
+      }
+    }
   </script>
 
 </html>
