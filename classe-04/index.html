@@ -24,6 +24,41 @@
   </body>
 
   <script>
+ const balao = document.querySelector('img')
+ balao.addEventListener('click', crescer);
+ balao.addEventListener('click', estourar);
+
+
+ function crescer(event){
+   const transform = event.target.style.transform
+   if(!transform){
+    event.target.style.transform = "scale(1.1)";
+    return;
+   } 
+     const scale = transform.replace("scale(", "").replace(")", "");
+     const somar = (Number(scale) + 0.1).toFixed(1)
+     if(somar > 2){
+       return
+     }
+     event.target.style.transform = `scale(${somar})`;
+ }
+
+ function estourar(event){
+  const transform = event.target.style.transform
+  const scale = transform.replace("scale(", "").replace(")", "");
+  console.log(scale)
+  if(scale === "2"){
+    event.target.src = "estouro.svg"
+
+   }
+
+ }
+
+
+
+
+
+
   </script>
 
 </html>
