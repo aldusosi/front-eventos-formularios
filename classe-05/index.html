@@ -42,7 +42,7 @@
                         <div class="validity-icon"></div>
                     </div>
                     <div class="button-wrapper">
-                        <button type="submit" class="animate__animated animate__bounceIn">PEGUE SUA AMOSTRA GRÁTIS</button>
+                        <button type="submit" class="animate__animated animate__bounceIn form__button">PEGUE SUA AMOSTRA GRÁTIS</button>
                     </div>
                     <p class="form__disclaimer animate__animated animate__fadeIn">Clicando neste botão, você está aceitando nossos <a href="#">Termos e Serviços.</a></p>
                 </form>
@@ -51,13 +51,79 @@
     </body>
 
     <script>
+
+        const form = document.querySelector("form");
+        const nome = document.querySelector("#first-name");
+        const sobreNome = document.querySelector("#last-name");
+        const email = document.querySelector("#email");
+        const senha = document.querySelector("#password");
+        const button = document.querySelector("button");  
+
+        let nomeEhValido = false;
+        let sobreNomeEhValido = false;
+        let emailEhValido = false;
+        let senhaValidada = false;
+
+        nome.addEventListener("input", (event) => {
+            const letraInicial = nome.value.charAt(0);
+            if(!nome.value.trim().length || letraInicial === letraInicial.toLowerCase()) {
+                invalidarElemento(nome, 'Nome deve começar com letra maíuscula');
+                nomeEhValido = false;
+            } else {
+                validarElemento(nome);
+                nomeEhValido = true;
+            }
+        });
+
+        sobreNome.addEventListener("input", (event) => {
+            const letraInicial = sobreNome.value.charAt(0);
+            if(!sobreNome.value.trim().length || letraInicial === letraInicial.toLowerCase()) {
+                invalidarElemento(sobreNome, 'Sobrenome deve começar com letra maíuscula');
+                sobreNomeEhValido = false;
+            } else {
+                validarElemento(sobreNome);
+                sobreNomeEhValido = true;
+            }
+        });
+        
+        email.addEventListener("input", (event) => {
+            if (!email.value.trim().length) {
+                invalidarElemento(email, 'Campo obrigatório');
+                emailEhValido = false;
+            }else {
+                validarElemento(email);
+                emailEhValido = true;
+            }
+        });
+        
+        senha.addEventListener("input", (event) => {
+            let senhaValida  = new RegExp("^(.{0,7}|[^0-9]*|[^a-z]*)$");
+
+            if(!senha.value.trim().length || senhaValida.test(senha.value)) {
+                invalidarElemento(senha, 'Senha deve ter no mínimo 8 caracteres e conter pelo menos 1 letra e 1 número');
+                senhaValidada = false;
+            } else {
+                validarElemento(senha);
+                senhaValidada = true;
+            }
+        });
+
+        form.addEventListener("submit", (event) => {
+            if(senhaValidada === true && nomeEhValido === true && sobreNomeEhValido === true && emailEhValido === true) {
+                validarElemento(button);
+            }else {
+                invalidarElemento(button, 'Todos os campos são obrigatórios');
+                event.preventDefault();
+            }
+        });
+        
+        
         function invalidarElemento(elemento, mensagem) {
             elemento.setCustomValidity(mensagem);
         }
-
         function validarElemento(elemento) {
             elemento.setCustomValidity('');
         }
-    </script>
+        </script>
 
 </html>
