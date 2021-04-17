@@ -15,7 +15,13 @@
 
       img {
         max-width: 200px;
+        transform: scale(1);
       }
+
+      img:hover{
+        cursor: pointer;
+      }
+
     </style>
   </head>
 
@@ -24,6 +30,24 @@
   </body>
 
   <script>
+
+    const balao = document.querySelector('img');
+
+    let count = 1;
+
+    crescer = () => {
+      count += 0.1;
+      
+      if (count >= 2) {
+        balao.src = "esoturo.svg";
+        balao.removeEventListener('click', crescer);
+      }else {
+        balao.style.transform = `scale(${count})`
+      }
+    }
+
+    balao.addEventListener('click', crescer);
+
   </script>
 
 </html>
