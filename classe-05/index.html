@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
     <head>
@@ -20,7 +21,7 @@
 
             <div class="cta">
                 <div class="feature animate__animated animate__fadeIn"><span>7 dias grátis</span> depois R$20/mês.</div>
-                <form action="#" method="POST" class="form">
+                <form action="#" method="POST" name="formulario" class="form">
                     <div class="input-wrapper animate__animated animate__fadeIn">
                         <label for="first-name" class="hidden">Nome</label>
                         <input type="text" name="first-name" id="first-name" placeholder="Nome" class="form__first-name">
@@ -51,13 +52,46 @@
     </body>
 
     <script>
-        function invalidarElemento(elemento, mensagem) {
-            elemento.setCustomValidity(mensagem);
-        }
+       const formulario = document.querySelector('form');
+       const nome = document.querySelector('#first-name');
+       const sobrenome = document.querySelector('#last-name');
+       const email = document.querySelector('#email');
+       const senha = document.querySelector('#password');
+       const botao = document.querySelector('button');
+       const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]$/;
+       
 
-        function validarElemento(elemento) {
-            elemento.setCustomValidity('');
+       botao.addEventListener('click', inputVazio);
+       senha.addEventListener('input', validarSenha);
+
+        const inputVazio = (event) => {
+            const input = event.currentTarget;
+
+            if(nome.value == "" || sobrenome.value == "" || email.value == "" || senha.value == ""){
+                botao.setAttribute("disabled", "disabled");
+                alert('Todos os campos devem ser preenchidos');
+            }else{
+                botao.removeAttribute("disabled");
+            }
+
+        const validarSenha = (event) =>{
+            const input = event.currentTarget;
+
+            if(input.value.length < 8){
+                botao.setAttribute("disabled", "disabled");
+            }else{
+                botao.removeAttribute("disabled");
+            }
+
+            if(input.value !== regex){
+                botao.setAttribute("disabled", "disabled");
+                alert('senha deve conter numeros');
+            }else{
+                alert('senha ok');
+                botao.removeAttribute("disabled");
+            }
         }
+        
     </script>
 
 </html>
