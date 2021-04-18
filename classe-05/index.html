@@ -1,63 +1,192 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="./assets/style.css" />
+    <link rel="stylesheet" href="estilo-exercicio.css" />
+    <title>Classe 1</title>
+  </head>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-        <link rel="stylesheet" href="./assets/style.css">
-        <link rel="stylesheet" href="estilo-exercicio.css">
-        <title>Classe 1</title>
-    </head>
+  <body>
+    <div class="content-wrapper">
+      <div class="hero">
+        <h1 class="main-heading animate__animated animate__fadeInDown">
+          Aprenda a codar observando outros.
+        </h1>
+        <p class="paragraph animate__animated animate__fadeInUp">
+          Veja como devs experientes resolvem problemas em tempo real. Assitir
+          tutoriais com roteiro é ótimo, mas entender como desenvolvedores
+          pensam, não tem preço.
+        </p>
+      </div>
 
-    <body>
-        <div class="content-wrapper">
-            <div class="hero">
-                <h1 class="main-heading animate__animated animate__fadeInDown">Aprenda a codar observando outros.</h1>
-                <p class="paragraph animate__animated animate__fadeInUp">Veja como devs experientes resolvem problemas em tempo real. Assitir tutoriais com roteiro é ótimo, mas entender como desenvolvedores pensam, não tem preço.</p>
-            </div>
-
-            <div class="cta">
-                <div class="feature animate__animated animate__fadeIn"><span>7 dias grátis</span> depois R$20/mês.</div>
-                <form action="#" method="POST" class="form">
-                    <div class="input-wrapper animate__animated animate__fadeIn">
-                        <label for="first-name" class="hidden">Nome</label>
-                        <input type="text" name="first-name" id="first-name" placeholder="Nome" class="form__first-name">
-                        <div class="validity-icon"></div>
-                    </div>
-                    <div class="input-wrapper animate__animated animate__fadeIn">
-                        <label for="last-name" class="hidden">Sobrenome</label>
-                        <input type="text" name="last-name" id="last-name" placeholder="Sobrenome" class="form__last-name">
-                        <div class="validity-icon"></div>
-                    </div>
-                    <div class="input-wrapper animate__animated animate__fadeIn">
-                        <label for="email" class="hidden">Email</label>
-                        <input type="email" name="email" id="email" placeholder="Email" class="form__email">
-                        <div class="validity-icon"></div>
-                    </div>
-                    <div class="input-wrapper animate__animated animate__fadeIn">
-                        <label for="password" class="hidden">Senha</label>
-                        <input type="password" name="password" id="password" placeholder="Senha" class="form__password">
-                        <div class="validity-icon"></div>
-                    </div>
-                    <div class="button-wrapper">
-                        <button type="submit" class="animate__animated animate__bounceIn">PEGUE SUA AMOSTRA GRÁTIS</button>
-                    </div>
-                    <p class="form__disclaimer animate__animated animate__fadeIn">Clicando neste botão, você está aceitando nossos <a href="#">Termos e Serviços.</a></p>
-                </form>
-            </div>
+      <div class="cta">
+        <div class="feature animate__animated animate__fadeIn">
+          <span>7 dias grátis</span> depois R$20/mês.
         </div>
-    </body>
+        <form action="#" method="POST" class="form">
+          <div class="input-wrapper animate__animated animate__fadeIn">
+            <label for="first-name" class="hidden">Nome</label>
+            <input
+              type="text"
+              name="first-name"
+              id="first-name"
+              placeholder="Nome"
+              class="form__first-name"
+            />
+            <div class="validity-icon"></div>
+          </div>
+          <div class="input-wrapper animate__animated animate__fadeIn">
+            <label for="last-name" class="hidden">Sobrenome</label>
+            <input
+              type="text"
+              name="last-name"
+              id="last-name"
+              placeholder="Sobrenome"
+              class="form__last-name"
+            />
+            <div class="validity-icon"></div>
+          </div>
+          <div class="input-wrapper animate__animated animate__fadeIn">
+            <label for="email" class="hidden">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              class="form__email"
+            />
+            <div class="validity-icon"></div>
+          </div>
+          <div class="input-wrapper animate__animated animate__fadeIn">
+            <label for="password" class="hidden">Senha</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Senha"
+              class="form__password"
+            />
+            <div class="validity-icon"></div>
+          </div>
+          <div class="button-wrapper">
+            <button type="submit" class="animate__animated animate__bounceIn">
+              PEGUE SUA AMOSTRA GRÁTIS
+            </button>
+          </div>
+          <p class="form__disclaimer animate__animated animate__fadeIn">
+            Clicando neste botão, você está aceitando nossos
+            <a href="#">Termos e Serviços.</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </body>
 
-    <script>
-        function invalidarElemento(elemento, mensagem) {
-            elemento.setCustomValidity(mensagem);
+  <script>
+    function invalidarElemento(elemento, mensagem) {
+      elemento.setCustomValidity(mensagem);
+    }
+
+    function validarElemento(elemento) {
+      elemento.setCustomValidity("");
+    }
+    const nome = document.querySelector("#first-name");
+    let nomeValido = false;
+    const sobrenome = document.querySelector("#last-name");
+    let sobrenomeValido = false;
+    const email = document.querySelector("#email");
+    let emailValido = false;
+    const senha = document.querySelector("#password");
+    let senhaValida = false;
+    const formulario = document.querySelector("form");
+
+    nome.addEventListener("input", event => {
+      if (nome.value.length > 0) {
+        if (nome.value[0] === nome.value[0].toLowerCase()) {
+          invalidarElemento(nome, "O nome deve começar com letra maiúscula.");
+          nomeValido = false;
+          return;
         }
+        validarElemento(nome);
+        nomeValido = true;
+        return;
+      }
+      invalidarElemento(nome, "O campo não deve estar vazio.");
+      nomeValido = false;
+    });
 
-        function validarElemento(elemento) {
-            elemento.setCustomValidity('');
+    sobrenome.addEventListener("input", event => {
+      if (sobrenome.value.length > 0) {
+        if (sobrenome.value[0] === sobrenome.value[0].toLowerCase()) {
+          invalidarElemento(
+            sobrenome,
+            "O sobrenome deve começar com letra maiúscula."
+          );
+          sobrenomeValido = false;
+          return;
         }
-    </script>
+        validarElemento(sobrenome);
+        sobrenomeValido = true;
+        return;
+      }
+      invalidarElemento(sobrenome, "O campo não deve estar vazio.");
+      sobrenomeValido = false;
+    });
 
+    email.addEventListener("input", event => {
+      if (email.value.length > 0) {
+        if (!email.value.includes("@")) {
+          invalidarElemento(email, "O email deve conter @.");
+          emailValido = false;
+          return;
+        }
+        validarElemento(email);
+        emailValido = true;
+        return;
+      }
+      invalidarElemento(email, "O campo não deve estar vazio.");
+      emailValido = false;
+    });
+
+    senha.addEventListener("input", event => {
+      if (senha.value.length >= 8) {
+        let quantLetra = 0;
+        let quantNumero = 0;
+        for (digito of senha.value) {
+          if (digito >= "A" && digito <= "z") quantLetra++;
+          else if (Number(digito) != NaN) quantNumero++;
+        }
+        console.log(quantLetra, quantNumero);
+        if (quantLetra >= 1 && quantNumero >= 1) {
+          validarElemento(senha);
+          senhaValida = true;
+          return;
+        }
+        invalidarElemento(
+          senha,
+          "A senha deve possuir pelo menos 1 letra e 1 número."
+        );
+        senhaValida = false;
+        return;
+      }
+      invalidarElemento(senha, "A senha deve possuir pelo menos 8 caracteres.");
+      senhaValida = false;
+    });
+
+    formulario.addEventListener("submit", event => {
+      if (!nomeValido || !sobrenomeValido || !emailValido || !senhaValida) {
+        event.preventDefault();
+      }
+    });
+  </script>
 </html>
