@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Conversor de temperatura</title>
   </head>
 
   <body>
     <div class="primeiro">
-      <input type="number" class="txtGrau">
+      <input type="number" class="txtGrau" />
       <select class="drpTemperaturas" id="drpPrimeiro">
         <option value="Celsius" selected>Celsius</option>
         <option value="Fahrenheit">Fahrenheit</option>
@@ -17,7 +16,7 @@
       </select>
     </div>
     <div class="segundo">
-      <input type="number" class="txtGrau">
+      <input type="number" class="txtGrau" />
       <select class="drpTemperaturas" id="drpSegundo">
         <option value="Celsius">Celsius</option>
         <option value="Fahrenheit" selected>Fahrenheit</option>
@@ -27,6 +26,147 @@
   </body>
 
   <script>
-  </script>
+    function converterCelsius(valor, converterPara) {
+      if (converterPara === "Fahrenheit") {
+        return (valor * 9) / 5 + 32;
+      } else if (converterPara === "Kelvin") {
+        return valor + 273.15;
+      } else {
+        return valor;
+      }
+    }
 
+    function converterFahrenheit(valor, converterPara) {
+      if (converterPara === "Celsius") {
+        return ((valor - 32) * 5) / 9;
+      } else if (converterPara === "Kelvin") {
+        return ((valor - 32) * 5) / 9 + 273.15;
+      } else {
+        return valor;
+      }
+    }
+
+    function converterKelvin(valor, converterPara) {
+      if (converterPara === "Celsius") {
+        return valor - 273.15;
+      } else if (converterPara === "Fahrenheit") {
+        return ((valor - 273.15) * 9) / 5 + 32;
+      } else {
+        return valor;
+      }
+    }
+
+    const primeiroSelect = document.querySelector("#drpPrimeiro");
+    const primeiroInput = document.querySelector(".primeiro .txtGrau");
+    const segundoSelect = document.querySelector("#drpSegundo");
+    const segundoInput = document.querySelector(".segundo .txtGrau");
+
+    primeiroInput.addEventListener("input", () => {
+      const valorPrimeiroInput = primeiroInput.valueAsNumber;
+      const valorSegundoSelect = segundoSelect.value;
+      switch (primeiroSelect.value) {
+        case "Celsius":
+          segundoInput.value = converterCelsius(
+            valorPrimeiroInput,
+            valorSegundoSelect
+          );
+          break;
+        case "Fahrenheit":
+          segundoInput.value = converterFahrenheit(
+            valorPrimeiroInput,
+            valorSegundoSelect
+          );
+          break;
+        case "Kelvin":
+          segundoInput.value = converterKelvin(
+            valorPrimeiroInput,
+            valorSegundoSelect
+          );
+          break;
+        default:
+          break;
+      }
+    });
+
+    segundoInput.addEventListener("input", () => {
+      const valorSegundoInput = segundoInput.valueAsNumber;
+      const valorPrimeiroSelect = primeiroSelect.value;
+      switch (segundoSelect.value) {
+        case "Celsius":
+          primeiroInput.value = converterCelsius(
+            valorSegundoInput,
+            valorPrimeiroSelect
+          );
+          break;
+        case "Fahrenheit":
+          primeiroInput.value = converterFahrenheit(
+            valorSegundoInput,
+            valorPrimeiroSelect
+          );
+          break;
+        case "Kelvin":
+          primeiroInput.value = converterKelvin(
+            valorSegundoInput,
+            valorPrimeiroSelect
+          );
+          break;
+        default:
+          break;
+      }
+    });
+
+    primeiroSelect.addEventListener("change", () => {
+      const valorSegundoInput = segundoInput.valueAsNumber;
+      const valorPrimeiroSelect = primeiroSelect.value;
+      switch (segundoSelect.value) {
+        case "Celsius":
+          primeiroInput.value = converterCelsius(
+            valorSegundoInput,
+            valorPrimeiroSelect
+          );
+          break;
+        case "Fahrenheit":
+          primeiroInput.value = converterFahrenheit(
+            valorSegundoInput,
+            valorPrimeiroSelect
+          );
+          break;
+        case "Kelvin":
+          primeiroInput.value = converterKelvin(
+            valorSegundoInput,
+            valorPrimeiroSelect
+          );
+          break;
+        default:
+          break;
+      }
+    });
+
+    segundoSelect.addEventListener("change", () => {
+      const valorPrimeiroInput = primeiroInput.valueAsNumber;
+      const valorSegundoSelect = segundoSelect.value;
+      switch (primeiroSelect.value) {
+        case "Celsius":
+          segundoInput.value = converterCelsius(
+            valorPrimeiroInput,
+            valorSegundoSelect
+          );
+          break;
+        case "Fahrenheit":
+          segundoInput.value = converterFahrenheit(
+            valorPrimeiroInput,
+            valorSegundoSelect
+          );
+          break;
+        case "Kelvin":
+          segundoInput.value = converterKelvin(
+            valorPrimeiroInput,
+            valorSegundoSelect
+          );
+          break;
+        default:
+          break;
+      }
+    });
+  </script>
 </html>
