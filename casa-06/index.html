@@ -1,50 +1,96 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Busca de professores</title>
+    <style>
+      body {
+        display: grid;
+        place-content: center;
+        min-height: 80vh;
+      }
+
+      span {
+        display: none;
+      }
+    </style>
   </head>
 
   <body>
-
+    <label for="professor">ID</label>
+    <input type="number" name="professor" id="professor" />
+    <img src="" alt="" />
+    <h3></h3>
+    <p></p>
+    <span>Nenhum professor encontrado...</span>
   </body>
 
   <script>
-    const basePath = './assets/';
+    const basePath = "./assets/";
 
-    const professores = [{
-      id: 1,
-      name: 'Leonardo',
-      stack: 'Back-end',
-      avatar: `${basePath}leo.jfif`
-    }, {
-      id: 2,
-      name: 'Guido',
-      stack: 'Fullstack',
-      avatar: `${basePath}guido.png`
-    }, {
-      id: 3,
-      name: 'Dina',
-      stack: 'Fullstack',
-      avatar: `${basePath}dina.jfif`
-    }, {
-      id: 4,
-      name: 'Daniel',
-      stack: 'Fullstack',
-      avatar: `${basePath}dani.png`
-    }, {
-      id: 5,
-      name: 'Vitinho',
-      stack: 'Frontend',
-      avatar: `${basePath}vitinho.png`
-    }, {
-      id: 6,
-      name: 'Juninho',
-      stack: 'Backend',
-      avatar: `${basePath}juninho.jfif`
-    }]
+    const professores = [
+      {
+        id: 1,
+        name: "Leonardo",
+        stack: "Back-end",
+        avatar: `${basePath}leo.jfif`,
+      },
+      {
+        id: 2,
+        name: "Guido",
+        stack: "Fullstack",
+        avatar: `${basePath}guido.png`,
+      },
+      {
+        id: 3,
+        name: "Dina",
+        stack: "Fullstack",
+        avatar: `${basePath}dina.jfif`,
+      },
+      {
+        id: 4,
+        name: "Daniel",
+        stack: "Fullstack",
+        avatar: `${basePath}dani.png`,
+      },
+      {
+        id: 5,
+        name: "Vitinho",
+        stack: "Frontend",
+        avatar: `${basePath}vitinho.png`,
+      },
+      {
+        id: 6,
+        name: "Juninho",
+        stack: "Backend",
+        avatar: `${basePath}juninho.jfif`,
+      },
+    ];
+
+    const inputProfessor = document.querySelector("input");
+    const nomeProfessor = document.querySelector("h3");
+    const stackProfessor = document.querySelector("p");
+    const fotoProfessor = document.querySelector("img");
+    const mensagemErro = document.querySelector("span");
+
+    inputProfessor.addEventListener("blur", event => {
+      const idProfessor = inputProfessor.valueAsNumber;
+      const professor = professores.find(item => item.id === idProfessor);
+      if (professor != undefined) {
+        nomeProfessor.innerText = professor.name;
+        stackProfessor.innerText = professor.stack;
+        fotoProfessor.src = professor.avatar;
+        nomeProfessor.style.display = "block";
+        stackProfessor.style.display = "block";
+        fotoProfessor.style.display = "block";
+        mensagemErro.style.display = "none";
+      } else {
+        mensagemErro.style.display = "inline";
+        nomeProfessor.style.display = "none";
+        stackProfessor.style.display = "none";
+        fotoProfessor.style.display = "none";
+      }
+    });
   </script>
-
 </html>
