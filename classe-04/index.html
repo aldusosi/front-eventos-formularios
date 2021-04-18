@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Exercício de classe</title>
 
     <style>
@@ -20,10 +19,28 @@
   </head>
 
   <body>
-    <img src="balao.png" alt="Um balão">
+    <img src="balao.png" alt="Um balão" />
   </body>
 
   <script>
-  </script>
+    let tamanho = 1;
+    const balao = document.querySelector("img");
 
+    function crescer() {
+      tamanho += 0.1;
+      console.log(tamanho);
+      balao.style.transform = `scale(${tamanho})`;
+      if (tamanho >= 2.0) {
+        estourar();
+      }
+    }
+
+    function estourar() {
+      console.log("entrou");
+      balao.removeEventListener("click", crescer);
+      balao.src = "estouro.svg";
+    }
+
+    balao.addEventListener("click", crescer);
+  </script>
 </html>
