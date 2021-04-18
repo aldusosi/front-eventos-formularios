@@ -8,6 +8,20 @@
   </head>
 
   <body>
+    <form>
+      <div>
+        <label for="busca"></label>
+        <input type="number" id="busca">
+      </div>
+      <div>
+        <img>
+      </div>
+      <div>
+        <h1 id="title"></h1>
+        <p></p>
+        <span></span>
+      </div>
+    </form>
 
   </body>
 
@@ -45,6 +59,36 @@
       stack: 'Backend',
       avatar: `${basePath}juninho.jfif`
     }]
+
+    const busca = document.querySelector("#busca");
+    const img = document.querySelector("img");
+    const nome = document.querySelector("#title");
+    const stack = document.querySelector("p");
+    const span = document.querySelector("span");
+
+    busca.addEventListener("blur", (event) =>{
+      let encontrado = false;
+      
+      for(let prof of professores){
+        if(prof.id === event.target.valueAsNumber){
+          img.src = `${prof.avatar}`;
+          nome.innerText = `${prof.name}`;
+          stack.innerText = `${prof.stack}`;
+          span.style.display = 'none';
+
+          encontrado = true;
+          break;
+        }
+      }
+      if(encontrado ===false){
+        console.log(encontrado);
+        span.innerText = "Nenhum professor encontrado";
+        span.style.display = 'inline';
+        img.style.display = 'none';
+        nome.style.display = 'none';
+        stack.style.display = 'none';
+      }
+    });
   </script>
 
 </html>
