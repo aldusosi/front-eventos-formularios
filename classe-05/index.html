@@ -51,6 +51,55 @@
     </body>
 
     <script>
+        const form = document.querySelector('.form');
+        const nome = document.querySelector('#first-name');
+        const sobrenome = document.querySelector('#last-name');
+        const email = document.querySelector('#email');
+        const senha = document.querySelector('#password');
+        const botao = document.querySelector('button');
+
+        let nomeValido = false;
+        let sobrenomeValido = false;
+        let senhaValida = false;
+
+        nome.addEventListener('input', (event) => {
+            let inicial = nome.value.charAt(0);
+            let erro = "Nome Inválido. Primeira letra deve ser maiúscula";
+
+            if(!event.target.value || inicial === inicial.toLowerCase()){
+                invalidarElemento(nome,erro);
+                nomeValido = false;
+            }else {
+                validarElemento(nome);
+                nomeValido = true;
+            }
+        })
+
+        sobrenome.addEventListener('input', (event) => {
+            let inicial = sobrenome.value.charAt(0);
+            let erro = "Sobrenome Inválido. Primeira letra deve ser maiúscula";
+
+            if(!event.target.value || inicial === inicial.toLowerCase()){
+                invalidarElemento(sobrenome,erro);
+                sobrenomeValido = false;
+            }else {
+                validarElemento(sobrenome);
+                sobrenomeValido = true;
+            }
+        })
+
+        senha.addEventListener('input', (event) => {
+            senha = true
+        })
+
+        form.addEventListener('submit', (event) => {
+            let erro = "Todos os campos devem ser preenchidos";
+            if(nomeValido === false || sobrenomeValido === false || senhaValida === false){
+                invalidarElemento(botao, erro)
+                event.preventDefault();
+            }
+        })
+
         function invalidarElemento(elemento, mensagem) {
             elemento.setCustomValidity(mensagem);
         }
