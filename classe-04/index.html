@@ -15,6 +15,7 @@
 
       img {
         max-width: 200px;
+
       }
     </style>
   </head>
@@ -22,8 +23,25 @@
   <body>
     <img src="balao.png" alt="Um balão">
   </body>
-
   <script>
+    const img = document.querySelector('img');
+    let i =0
+
+    crescer = ({ target, target: { style } }) => {
+      style.transform += 'scale(1.1)'
+      i++
+    }
+
+    estourar = ({ target, target: { style } }) => {
+      if(i > 9){
+        target.src = "estouro.svg"
+        target.removeEventListener('click', crescer)
+      }
+    }
+
+    img.addEventListener('click', crescer)
+    img.addEventListener('click', estourar)
+
   </script>
 
 </html>

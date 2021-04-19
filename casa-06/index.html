@@ -1,50 +1,145 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca de professores</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
 
-  <body>
+  <title>Busca de professores</title>
 
-  </body>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background-color: white;
+      color: #31120C;
+      font-family: 'Amatic SC', cursive;
+    }
 
-  <script>
-    const basePath = './assets/';
+    .poster {
+      height: 100%;
+      position: fixed;
+      z-index: 1;
+      display: none;
+    }
 
-    const professores = [{
-      id: 1,
-      name: 'Leonardo',
-      stack: 'Back-end',
-      avatar: `${basePath}leo.jfif`
-    }, {
-      id: 2,
-      name: 'Guido',
-      stack: 'Fullstack',
-      avatar: `${basePath}guido.png`
-    }, {
-      id: 3,
-      name: 'Dina',
-      stack: 'Fullstack',
-      avatar: `${basePath}dina.jfif`
-    }, {
-      id: 4,
-      name: 'Daniel',
-      stack: 'Fullstack',
-      avatar: `${basePath}dani.png`
-    }, {
-      id: 5,
-      name: 'Vitinho',
-      stack: 'Frontend',
-      avatar: `${basePath}vitinho.png`
-    }, {
-      id: 6,
-      name: 'Juninho',
-      stack: 'Backend',
-      avatar: `${basePath}juninho.jfif`
-    }]
-  </script>
+    .nome, p{
+      position:fixed;
+      bottom:13vh;
+      z-index: 2;
+      opacity:0.9;
+    }
+    
+    p {
+      position:fixed;
+      font-size: 60px;
+      bottom:0.1vh;
+      left: 40vw;
+      z-index: 2;
+      font-weight: 700;
+    }
+
+    .picture {
+      position: fixed;
+      top: 15vh;
+      z-index: 0;
+      height: 56%;
+      filter: sepia(90%) ;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 55px;
+    }
+
+  
+    span {
+      display: none;
+      color: brown;
+      font-size:25px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Procura-se um professor</h1>
+  <input type="number" id="busca">
+  <span>Nenhum professor encontrado...</span>
+
+  <img class="poster" src='assets/Wanted.png'><h1 class ='nome'></h1>
+<P></P> </img>
+  <img class="picture" src=''/>
+
+</body>
+
+<script>
+  const idSearch = document.querySelector('input')
+  const picture = document.querySelector('.picture')
+  const poster = document.querySelector('.poster')
+  const nome = document.querySelector('.nome')
+  const span = document.querySelector('span')
+  const p = document.querySelector('p')
+  const basePath = './assets/';
+
+  findTeacher = ({ target, target:{ value }}) => {
+    professores.forEach((professor) => {
+      if (value == professor.id) {
+        idSearch.style.display = 'none'; 
+        picture.src = professor.avatar;
+        poster.style.display = 'flex';
+        nome.innerText = `${professor.name} - ${professor.stack}`;
+        p.innerText = `${Math.round(Math.random()*100)}.000.000`
+        value > 1 ? picture.style.top = '22vh' : null
+        return;
+      }
+        span.style.display = 'flex'
+    })
+
+  }
+
+//picture.src = professores[i]
+
+
+  const professores = [{
+    id: 1,
+    name: 'Leonardo',
+    stack: 'Back-end',
+    avatar: `${basePath}leo.jfif`
+  }, {
+    id: 2,
+    name: 'Guido',
+    stack: 'Fullstack',
+    avatar: `${basePath}guido.png`
+  }, {
+    id: 3,
+    name: 'Dina',
+    stack: 'Fullstack',
+    avatar: `${basePath}dina.jfif`
+  }, {
+    id: 4,
+    name: 'Daniel',
+    stack: 'Fullstack',
+    avatar: `${basePath}dani.png`
+  }, {
+    id: 5,
+    name: 'Vitinho',
+    stack: 'Frontend',
+    avatar: `${basePath}vitinho.png`
+  }, {
+    id: 6,
+    name: 'Juninho',
+    stack: 'Backend',
+    avatar: `${basePath}juninho.jfif`
+  }]
+
+  idSearch.addEventListener('blur', findTeacher)
+
+</script>
 
 </html>
