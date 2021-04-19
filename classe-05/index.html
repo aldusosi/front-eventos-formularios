@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="./assets/style.css">
         <link rel="stylesheet" href="estilo-exercicio.css">
         <title>Classe 1</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
     </head>
 
     <body>
@@ -51,6 +53,67 @@
     </body>
 
     <script>
+        const nome = document.querySelector(".form__first-name");
+        const sobreNome = document.querySelector(".form__last-name");
+        const email = document.querySelector(".form__email");
+        const senha = document.querySelector(".form__password");
+        const form = document.querySelector(".form");
+
+        const nomeInvalido = false;
+        const sobreNomeInvalido = false;
+        const emailInvalido = false;
+        const senhaInvalida = false;
+
+        nome.addEventListener("change", ()=>{
+            if(nome.value[0] != nome.value[0].toUpperCase()){
+                invalidarElemento(nome,'nome precisa começar com letra maiúscula.');
+                nomeInvalido = true;
+            }else{
+                validarElemento(nome);
+                nomeInvalido = false;
+            }
+        });
+
+        sobreNome.addEventListener("change", ()=>{
+            if(sobreNome.value[0] != sobreNome.value[0].toUpperCase()){
+                invalidarElemento(sobreNome, "sobrenome precisa começar com letra maiúscula.");
+                sobreNomeInvalido = true;
+            }else{
+                validarElemento(sobreNome);
+                sobreNomeInvalido = false;
+            }
+        });
+
+        email.addEventListener("change", ()=>{
+            if(!email.value.includes("@")){
+                invalidarElemento(email,"Email precisa incluir @")
+                emailInvalido = true;
+            }else{
+                validarElemento(email);
+                emailInvalido = false;
+            }
+        });
+
+        senha.addEventListener("change", ()=>{
+            if(senha.value.length < 8 || senha.value.search(`[A-Z]`) == -1 && senha.value.search(`[a-z]`) == -1 || senha.value.search(`[0-9]`) == -1){
+                invalidarElemento(senha, "A senha precisa conter 8 elementos e possuir letras e números ");
+                senhaInvalida = true;
+            }else {
+                validarElemento(senha);
+                senhaInvalida = false;
+            }
+        })
+
+        form.addEventListener("submit", (event)=>{
+            
+            if(nomeInvalido == true || sobreNomeInvalido == true || emailInvalido == true || senhaInvalida == true){
+                alert("Existe um erro no formulário, favor reveja suas respostas.");
+            }else{
+                alert("formulário entregue, obrigado pelo registro");
+            }
+            event.preventDefault();
+        });
+
         function invalidarElemento(elemento, mensagem) {
             elemento.setCustomValidity(mensagem);
         }
