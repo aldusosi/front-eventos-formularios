@@ -51,13 +51,60 @@
     </body>
 
     <script>
+        const form = document.querySelector('form');
+        const inputs = document.querySelectorAll('input');
+        const nome = document.querySelector('#first-name');
+        const sobrenome = document.querySelector('#last-name');
+        const senha = document.querySelector('#password');
+
+        const msgErroNomes = "Nome e Sobrenome devem começar com letra maiúscula"
+        const msgErroSenha = "A senha deve ter no mínimo 8 caracteres e conter pelo menos 1 letra e 1 número"
+                
+        nome.addEventListener('input', validarNome);
+        sobrenome.addEventListener('input', validarSobrenome);
+        senha.addEventListener('input', validarSenha);
+        form.addEventListener('submit', validarForm);
+
+        function validarForm(event) {
+            inputs.forEach(input => {
+                validarElemento(input);
+                if (input.value.trim() === "") {
+                    invalidarElemento(input, "Preenchimento inválido");
+                    event.preventDefault();                    
+                };
+            });
+        };
+
+        function validarNome(event) {            
+            validarElemento(nome);
+            const inicial = nome.value.charAt(0);
+            if (inicial === inicial.toLowerCase()) invalidarElemento(nome, msgErroNomes);
+        };
+
+        function validarSobrenome(event) {            
+            validarElemento(sobrenome);
+            const inicial = sobrenome.value.charAt(0);
+            if (inicial === inicial.toLowerCase()) invalidarElemento(sobrenome, msgErroNomes);
+        };
+
+        function validarSenha(event) {
+            validarElemento(senha);
+            const contemLetra = /[a-z]/i.test(senha.value);
+            const contemNumero = /[0-9]/.test(senha.value);
+
+            if (senha.value.length < 8 ||!contemNumero || !contemLetra) {
+                invalidarElemento(senha, msgErroSenha);
+            } 
+        };
+
         function invalidarElemento(elemento, mensagem) {
             elemento.setCustomValidity(mensagem);
-        }
+        };
 
         function validarElemento(elemento) {
             elemento.setCustomValidity('');
-        }
+        };
+        
     </script>
 
 </html>
