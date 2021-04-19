@@ -24,6 +24,24 @@
   </body>
 
   <script>
-  </script>
+    const img = document.querySelector('img');
+    let i = 1;
+
+    img.addEventListener('click', crescer);
+
+    function crescer() {
+      i += 0.1;
+      if (i === 2) {
+        img.removeEventListener('click', crescer);
+        img.src = './estouro.svg';
+      } else {
+        i = i.toFixed(1);
+        i = Number(i);
+        img.style.transform = `scale(${i})`;
+        console.log(i)
+      }
+    }
+    
+    </script>
 
 </html>
