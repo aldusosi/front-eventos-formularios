@@ -51,6 +51,62 @@
     </body>
 
     <script>
+        const nome = document.querySelector('#first-name');
+        const sobrenome = document.querySelector('#last-name');
+        const email = document.querySelector('#email');
+        const senha = document.querySelector('#password');
+        const form = document.querySelector('.form')
+        const botao = document.querySelector('.button-wrapper')
+        
+        nome.addEventListener('change', validaNome );
+        sobrenome.addEventListener('change', validaSobrenome);
+        email.addEventListener('change', validateEmailInput);
+        senha.addEventListener('change', validaSenha);
+        form.addEventListener('submit', validaForm);
+        
+        invalidarElemento(nome, "A letra inicial tem que ser maiúscula.");
+        invalidarElemento(sobrenome, "A letra inicial tem que ser maiúscula.");
+        invalidarElemento(email, `O endereço de e-mail deve conter "@" `);
+        invalidarElemento(senha, "Senha inválida. Sua senha deve conter no mínimo oito caracteres, uma letra e um número.");
+
+        function validaNome({target,target:{value}}) {
+            if (value[0]===value[0].toUpperCase()) {
+            validarElemento(nome);
+            return;
+            } 
+        }
+
+        function validaSobrenome({target,target:{value}}) {
+            if (value[0]===value[0].toUpperCase()) {
+            validarElemento(sobrenome);
+            return;
+            }
+        }
+
+        function validateEmailInput ({target:{value}}) {
+            const mailformat = /^[a-zA-Z0-9.!#$%&'+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$/;
+            if (value.match(mailformat)) {
+                validarElemento(email);
+            } 
+        }
+
+        function validaSenha({target:{value}}) {
+            const regex = /[a-zA]{1}[Z0-9]{1}/
+            if (value.length>=8 && regex.exec(value)){
+                validarElemento(senha);
+                return;
+            }
+        }
+
+        function validaForm(event) {
+            event.preventDefault();
+            if (nome.validity.valid && sobrenome.validity.valid && email.validity.valid && senha.validity.valid) {
+                alert("Formulário enviado com sucesso")
+            } else {
+                alert("Preencha todos os campos")
+            }
+        }
+
         function invalidarElemento(elemento, mensagem) {
             elemento.setCustomValidity(mensagem);
         }
