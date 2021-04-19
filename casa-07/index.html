@@ -9,7 +9,7 @@
 
   <body>
     <div class="primeiro">
-      <input type="number" class="txtGrau">
+      <input type="number" class="txtGrau" id="input1">
       <select class="drpTemperaturas" id="drpPrimeiro">
         <option value="Celsius" selected>Celsius</option>
         <option value="Fahrenheit">Fahrenheit</option>
@@ -17,7 +17,7 @@
       </select>
     </div>
     <div class="segundo">
-      <input type="number" class="txtGrau">
+      <input type="number" class="txtGrau" id="input2">
       <select class="drpTemperaturas" id="drpSegundo">
         <option value="Celsius">Celsius</option>
         <option value="Fahrenheit" selected>Fahrenheit</option>
@@ -27,6 +27,77 @@
   </body>
 
   <script>
+    const select1 = document.querySelector("#drpPrimeiro");
+    const select2 = document.querySelector("#drpSegundo");
+    const input1 = document.querySelector("#input1");
+    const input2 = document.querySelector("#input2");
+  
+
+    input1.addEventListener("input", ({target, target: {value}}) => {
+      conversor(value, input2, select1.value, select2.value);
+    });
+
+    input2.addEventListener("input", ({target, target: {value}}) => {
+      conversor(value, input1, select2.value, select1.value);
+    });
+
+    select1.addEventListener("change", ({target, target: {value}}) => {
+      conversor(input1.value, input2, value, select2.value);
+    });
+
+    select2.addEventListener("change", ({target, target: {value}}) => {
+      conversor(input1.value, input2, select1.value, value);
+    });
+
+
+    function conversor(valor, resultado, temperatura1, temperatura2){
+      if(temperatura1 === temperatura2){
+        resultado.value = valor;
+      }
+      else if(temperatura1 === "Celsius" && temperatura2 === "Fahrenheit"){
+       resultado.value  = celsiusParaFahrenheit(valor);
+      }
+      else if(temperatura1  === "Celsius" && temperatura2 === "Kelvin"){
+        resultado.value  = celsiusParaKelvin(valor);
+      }
+      else if(temperatura1  === "Fahrenheit" && temperatura2 === "Celsius"){
+        resultado.value  = fahrenheitParaCelsius(valor);
+      }
+      else if(temperatura1  === "Fahrenheit" && temperatura2 === "Kelvin"){
+        resultado.value  = fahrenheitParaKelvin(valor);
+      }
+      else if(temperatura1  === "Kelvin" && temperatura2 === "Celsius"){
+        resultado.value  = kelvinParaCelsius(valor);
+      }
+      else{
+        resultado.value  = kelvinParaFahrenheit(valor);
+      }
+    }
+
+    function celsiusParaFahrenheit(celsius){
+      return (celsius*9/5) + 32;
+    }
+
+    function celsiusParaKelvin(celsius){
+      return celsius + 273.15;
+    }
+
+    function fahrenheitParaCelsius(fah){
+      return (fah - 32) * (5/9);
+    }
+
+    function fahrenheitParaKelvin(fah){
+      return (fah - 32) * (5/9) + 273.15;
+    }
+
+    function kelvinParaCelsius(kelvin){
+      return kelvin - 273.15;
+    }
+
+    function kelvinParaFahrenheit(kelvin){
+      return (kelvin - 273.15) * (9/5) + 32;
+    }
+
   </script>
 
 </html>
