@@ -27,6 +27,73 @@
   </body>
 
   <script>
+    const inputPrimeiro = document.querySelector(".primeiro>input");
+    const inputSegundo = document.querySelector(".segundo>input");
+    const selectPrimeiro = document.querySelector("#drpPrimeiro");
+    const selectSegundo = document.querySelector("#drpSegundo");
+
+    inputPrimeiro.addEventListener('input', ({target, target:{value}}) => {
+      conversora(value,inputSegundo, selectPrimeiro.value, selectSegundo.value);
+    });
+
+    inputSegundo.addEventListener('input',  ({target, target:{value}}) => {
+      conversora(value,inputPrimeiro, selectSegundo.value, selectPrimeiro.value);
+    });
+
+    selectPrimeiro.addEventListener('change', ({target, target:{value}}) => {
+      conversora(inputPrimeiro.value, inputSegundo, value, selectSegundo.value);
+    });
+
+    selectSegundo.addEventListener('change',  ({target, target:{value}}) => {
+      conversora(inputPrimeiro.value, inputSegundo, selectPrimeiro.value, value);
+    });
+
+    function conversora(valor, resultado, tempUm, tempDois){
+      if (tempUm === tempDois){
+        resultado.value = valor;
+
+      }else if (tempUm === "Celsius" && tempDois === "Fahrenheit") {
+        resultado.value = celsiusParaFahrenheit(valor);
+
+      } else if (tempUm === "Celsius" && tempDois === "Kelvin"){
+        resultado.value = celsiusParaKelvin(valor);
+
+      } else if (tempUm === "Fahrenheit" && tempDois === "Celsius"){
+        resultado.value = fahrenheitParaCelsius(valor);
+
+      } else if (tempUm === "Fahrenheit" && tempDois === "Kelvin"){
+        resultado.value = fahrenheitParaKelvin(valor);
+
+      } else if (tempUm === "Kelvin" && tempDois === "Celsius" ){
+        resultado.value = kelvinParaCelsius(valor);
+        
+      }  else {
+        resultado.value = kelvinParaFahrenheit(valor);
+      } 
+
+    }
+
+    function celsiusParaFahrenheit(celsius){
+      return (celsius * 9/5) + 32;
+    };
+    function celsiusParaKelvin(celsius){ 
+      return celsius + 273.15;
+    };
+
+    function fahrenheitParaCelsius(fahrenheit){
+      return (fahrenheit - 32) * 5/9;
+    };
+    function fahrenheitParaKelvin(fahrenheit){
+       return ((fahrenheit - 32) * 5/9) + 273.15;
+      };
+
+    function kelvinParaCelsius(kelvin){
+      return kelvin - 273.15;
+    };
+    function kelvinParaFahrenheit(kelvin){
+      return ((kelvin - 273.15) * 9/5) + 32;
+    };
+
   </script>
 
 </html>
