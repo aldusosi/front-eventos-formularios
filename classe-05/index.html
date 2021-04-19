@@ -51,6 +51,75 @@
     </body>
 
     <script>
+        const nome = document.querySelector('#first-name');
+        const sobrenome = document.querySelector('#last-name');
+        const email = document.querySelector('#email');
+        const senha = document.querySelector('#password');
+        const form = document.querySelector('form');
+        const botao = document.querySelector('button');
+        
+        let nomeValido = false;
+        let sobrenomeValido = false;
+        let emailValido = false;
+        let senhaValida = false;
+
+        
+        
+        nome.addEventListener('change', (event) => {
+            const inicial = event.target.value.charAt(0);
+            
+            if (!event.target.value) {
+                return invalidarElemento(nome, 'Este campo é obrigatório!');
+            } else if (inicial === inicial.toLowerCase()) {
+                return invalidarElemento(nome, '"Nome" deve iniciar com letra maiúscula.');
+            } else {
+                nomeValido = true;
+                return validarElemento(nome);
+            }
+        });
+        
+        sobrenome.addEventListener('change', (event) => {
+            const inicial = event.target.value.charAt(0);
+            
+            if (!event.target.value) {
+                return invalidarElemento(sobrenome, 'Este campo é obrigatório!');
+            } else if (inicial === inicial.toLowerCase()) {
+                return invalidarElemento(sobrenome, '"Sobrenome" deve iniciar com letra maiúscula.');
+            } else {
+                sobrenomeValido = true;
+                return validarElemento(sobrenome);
+            }
+        });
+        
+        email.addEventListener('change', (event) => {
+            
+            if (!event.target.value) {
+                return invalidarElemento(email, 'Este campo é obrigatório!');
+            } else {
+                emailValido = true;
+                return validarElemento(email);
+            }
+        }); 
+
+        senha.addEventListener('change', (event) => {            
+            if (!event.target.value) {
+                return invalidarElemento(senha, 'Este campo é obrigatório!');
+            } else if (event.target.value.length < 8) {
+                return invalidarElemento(senha, 'Sua senha deve ter, no mínimo, 8 caracteres.');
+            } else if ((event.target.value.search(`[A-Z]`) === -1 && event.target.value.search(`[a-z]`) === -1) || event.target.value.search(`[0-9]`) === -1) {
+                return invalidarElemento(senha, 'Sua senha deve ter, no mínimo, 1 letra e 1 número.');
+            } else {
+                senhaValida = true;
+                return validarElemento(senha);
+            }
+        });
+
+        form.addEventListener('submit', (event) => {
+            if (!nomeValido || !sobrenomeValido || !emailValido || !senhaValida) {
+                event.preventDefault();
+            }
+        });
+         
         function invalidarElemento(elemento, mensagem) {
             elemento.setCustomValidity(mensagem);
         }
