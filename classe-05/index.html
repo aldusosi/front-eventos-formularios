@@ -64,7 +64,7 @@
 
         nome.addEventListener('input', (event) => {
             let inicial = nome.value.charAt(0);
-            let erro = "Nome Inválido. Primeira letra deve ser maiúscula";
+            let erro = "Primeira letra deve ser maiúscula";
 
             if(!event.target.value || inicial === inicial.toLowerCase()){
                 invalidarElemento(nome,erro);
@@ -77,7 +77,7 @@
 
         sobrenome.addEventListener('input', (event) => {
             let inicial = sobrenome.value.charAt(0);
-            let erro = "Sobrenome Inválido. Primeira letra deve ser maiúscula";
+            let erro = "Primeira letra deve ser maiúscula";
 
             if(!event.target.value || inicial === inicial.toLowerCase()){
                 invalidarElemento(sobrenome,erro);
@@ -88,8 +88,31 @@
             }
         })
 
+        const numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        const letras = [..."abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+    
         senha.addEventListener('input', (event) => {
-            senha = true
+            let contemNumeros = [];
+            let contemLetras = [];
+            let tamanho = senha.value.length;
+            
+            
+            for(let item of senha.value){
+                contemNumeros.push(numeros.includes(item));
+                contemLetras.push(letras.includes(item));
+            }
+
+            let temLetras = contemLetras.some(x => x === true);
+            let temNumeros = contemNumeros.some(x => x=== true);
+
+            if(temNumeros && temLetras && tamanho >= 8){
+                validarElemento(senha);
+                senhaValida = true;
+            }else {
+                let erro = "Senha deve ter no mínimo 8 caracteres e conter pelo menos 1 letra e 1 número"
+                invalidarElemento(senha, erro)
+                senhaValida = false;
+            }
         })
 
         form.addEventListener('submit', (event) => {
@@ -97,6 +120,8 @@
             if(nomeValido === false || sobrenomeValido === false || senhaValida === false){
                 invalidarElemento(botao, erro)
                 event.preventDefault();
+            }else {
+                validarElemento(form); 
             }
         })
 
