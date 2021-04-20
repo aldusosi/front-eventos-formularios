@@ -5,10 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor de temperatura</title>
+
+    <style>
+      .container-seletor{
+        width: 300px;
+        margin:0 auto;
+      }
+    </style>
   </head>
 
   <body>
-    <div class="primeiro">
+    <div class="container-seletor">
+      <div class="primeiro">
       <input type="number" class="txtGrau">
       <select class="drpTemperaturas" id="drpPrimeiro">
         <option value="Celsius" selected>Celsius</option>
@@ -24,9 +32,44 @@
         <option value="Kelvin">Kelvin</option>
       </select>
     </div>
+    </div>
+    
   </body>
 
   <script>
+    //inputs
+    const input1 = document.querySelector(".primeiro .txtGrau");
+    const input2 = document.querySelector(".segundo .txtGrau");
+    //selects
+    const select1 = document.querySelector(".primeiro select");
+    const select2 = document.querySelector(".segundo select");
+
+    select1.addEventListener("change", conversor);
+
+    select2.addEventListener("change", conversor);
+
+    input1.addEventListener("change", conversor);
+
+    input2.addEventListener("change", conversor);
+    
+    function conversor(){
+      if(select1.value == "Celsius" && select2.value =="Fahrenheit"){//Celsius => Fahrenheit
+        input2.value = input1.value*(9/5)+32;
+      }else if(select1.value == "Fahrenheit" && select2.value =="Celsius"){//Fahrenheit => Celsius
+        input2.value = (input1.value-32)*5/9;
+      }else if(select1.value == "Celsius" && select2.value =="Kelvin"){//Celsius => Kevin
+        input2.value = Number(input1.value) + 273.15;
+      }else if(select1.value == "Kelvin" && select2.value =="Celsius"){//Kevin => Celsius
+        input2.value = input1.value - 273.15
+      }else if(select1.value == "Fahrenheit" && select2.value =="Kelvin"){//Fahrenheit => Kelvin
+        input2.value = (input1.value-32)*5/9+273.15
+      }else if(select1.value == "Kelvin" && select2.value =="Fahrenheit"){//Kelvin => Fahrenheit
+        input2.value = (input1.value-273.15)*9/5+32;
+      }else{
+        input2.value = input1.value;
+      }
+    }
+    
   </script>
 
 </html>
